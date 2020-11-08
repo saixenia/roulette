@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Roulette.Interfaces;
+using Roulette.Models;
 
 namespace roulette.Controllers
 {
@@ -12,39 +9,39 @@ namespace roulette.Controllers
     [ApiController]
     public class RouletteController : ControllerBase
     {
-        // GET: api/<RouletteController>
+        private readonly IRouletteService _rouletteService;
+
+        public RouletteController(IRouletteService rouletteService)
+        {
+            _rouletteService = rouletteService;
+        }
+
         [HttpGet]
-        public int Get()
+        public List<Roulettes> GetRoulettesCreated()
         {
-            //create roulette
-            //return rouletteId;
-            return 1;
+
+            return _rouletteService.GetRoulettesCreated();
         }
 
-        // GET api/<RouletteController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<RouletteController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Roulettes> CreateRoulette()
         {
-
+            
+            return CreatedAtAction(nameof(CreateRoulette), _rouletteService.CreateRoulette());
         }
 
-        // PUT api/<RouletteController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("OpenRoulette")]
+        public ActionResult OpenRoulette(Roulettes roulette)
         {
-        }
 
-        // DELETE api/<RouletteController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (!_rouletteService.OpenRoulette(roulette))
+            {
+
+                return NotFound();
+            }
+
+            return Ok();
         }
     }
 }
