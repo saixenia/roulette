@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Roulette.Models;
+using Microsoft.Extensions.Logging;
 using Roulette.Interfaces;
+using Roulette.Models;
 using Roulette.Services;
 
 namespace roulette
@@ -22,9 +23,10 @@ namespace roulette
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RouletteContext>(opt =>
-               opt.UseInMemoryDatabase("TodoList"));
+               opt.UseInMemoryDatabase("RouletteGame"));
             services.AddControllers();
             services.AddScoped<IRouletteService, RouletteService>();
+            services.AddScoped<IBetService, BetService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

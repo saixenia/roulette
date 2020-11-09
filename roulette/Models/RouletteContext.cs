@@ -10,5 +10,6 @@ namespace Roulette.Models
         }
 
         public DbSet<Roulettes> Roulettes { get; set; }
+        public DbSet<Bets> Bets { get; set; }
     }
 }

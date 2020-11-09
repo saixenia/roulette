@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Roulette.Interfaces;
 using Roulette.Models;
+using System.Collections.Generic;
 
 namespace roulette.Controllers
 {
@@ -26,7 +26,7 @@ namespace roulette.Controllers
         [HttpPost]
         public ActionResult<Roulettes> CreateRoulette()
         {
-            
+
             return CreatedAtAction(nameof(CreateRoulette), _rouletteService.CreateRoulette());
         }
 

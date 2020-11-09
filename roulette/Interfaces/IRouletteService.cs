@@ -8,5 +8,7 @@ namespace Roulette.Interfaces
         List<Roulettes> GetRoulettesCreated();
         int CreateRoulette();
         bool OpenRoulette(Roulettes roulette);
+        Roulettes GetFirstOpenedRoulette();
+        void CloseRoullete(Roulettes roulettes);
     }
 }
