@@ -15,10 +15,8 @@ namespace roulette
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging(logging =>
                 {
-                    logging.AddEventLog(eventLogSettings =>
-                    {
-                        eventLogSettings.SourceName = "MyLogs";
-                    });
+                    logging.ClearProviders();
+                    logging.AddConsole();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
